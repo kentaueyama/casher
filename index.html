@@ -9,8 +9,6 @@
 <body>
     <div>Teachable Machine Image Model</div>
 <button type="button" onclick="init()">いらっしゃいませ</button>
-<button type="button" onclick="init()">商品追加</button>
-<button type="button" onclick="init()">清算</button>
 <div id="webcam-container"></div>
 <div id="label-container"></div>
 <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@1.3.1/dist/tf.min.js"></script>
@@ -20,7 +18,18 @@
     // https://github.com/googlecreativelab/teachablemachine-community/tree/master/libraries/image
 
     // the link to your model provided by Teachable Machine export panel
-    const URL = "./my_model/";
+    const URL = "./my_model/"
+
+    const hukusoval = 2580*1.1;
+    const TOE6val = 3000*1.1;
+    const environval=2300*1.1;
+    const networkval=3000*1.1;
+    const TOREDval=2300*1.1;
+    const rinrival=2800*1.1;
+    const vectorval=2600*1.1;
+    const digitalval =2500*1.1;
+    const agrival=1400*1.1;
+
 
     let model, webcam, labelContainer, maxPredictions;
 
@@ -41,6 +50,7 @@
         webcam = new tmImage.Webcam(200, 200, flip); // width, height, flip
         await webcam.setup(); // request access to the webcam
         await webcam.play();
+        <button type="button" onclick="enter()">清算</button>
         window.requestAnimationFrame(loop);
 
         // append elements to the DOM
@@ -62,12 +72,14 @@
         // predict can take in an image, video or canvas html element
         const prediction = await model.predict(webcam.canvas);
 
-        var checknumber = 0; // 時間を数える関数
 
+
+        /*
         for (let i = 0; i < maxPredictions; i++) {
             const classPrediction =
                 prediction[i].className + ": " + prediction[i].probability.toFixed(2);
             labelContainer.childNodes[i].innerHTML = classPrediction;
+        */
         }
     }
 </script>
