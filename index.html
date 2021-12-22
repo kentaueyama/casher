@@ -59,10 +59,6 @@
         for (let i = 0; i < maxPredictions; i++) { // and class labels
             labelContainer.appendChild(document.createElement("div"));
         }
-    }
-
-    
-    async function init() {
         let div1 = document.getElementById("div1");
         // 要素の追加
         if (!div1.hasChildNodes()) {
@@ -72,6 +68,9 @@
           div1.appendChild(p1);
         }
     }
+
+    
+    
     
 
     async function loop() {
