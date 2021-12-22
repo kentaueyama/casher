@@ -9,9 +9,10 @@
 <body>
     <div>This is casher of your Text book</div>
 <button type="button" onclick="init()">Welcome</button>
-<button type="button" onclick="enter()">Enter</button>
+<button type="button" onclick="outdoor()">Enter</button>
 <div id="webcam-container"></div>
 <div id="label-container"></div>
+<div id="div1"></div>
 <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@1.3.1/dist/tf.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@teachablemachine/image@0.8/dist/teachablemachine-image.min.js"></script>
 <script type="text/javascript">
@@ -82,6 +83,16 @@
         }
         
         */
+    }
+    async function outdoor() {
+        let div1 = document.getElementById("div1");
+        // 要素の追加
+        if (!div1.hasChildNodes()) {
+          const p1 = document.createElement("p");
+          const text1 = document.createTextNode("テスト");
+          p1.appendChild(text1);
+          div1.appendChild(p1);
+        }
     }
 </script>
 
