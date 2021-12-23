@@ -11,11 +11,13 @@
     <div>Welcomeボタンを押してから、商品の表紙を読み込ませてください</div>
     <div>読ませ終わったらEnterボタンを押してください</div>
     <div>誤反応があったらDeleteボタンを押してください、一つ消えます</div>
+    <div>登録品目が分からなくなったらcomfirmingボタンを押してください、購入品目が出ます</div>
 <button type="button" onclick="init()">Welcome</button>
 <div id="webcam-container"></div>
 <div id="label-container"></div>
 <p><button type="button" onclick="outdoor()">Enter</button></p>
 <p><button type="button" onclick="Delete()">Delete</button></p>
+<p><button type="button" onclick="confirming()">Delete</button></p>
 
 <div>------------------------お会計------------------------</div>
 <div id="resume"></div>
@@ -154,7 +156,7 @@
             volumeNumber = digitalval;
         } else if (prediction[6].probability.toFixed(2) > 0.90) {
             status = "agri";
-            statusname = "野菜の教科書";
+            statusname = "農業";
             volumeNumber = agrival;
         } else if (prediction[7].probability.toFixed(2) > 0.90) {
             status = "complex";
@@ -193,6 +195,11 @@
             labelContainer.childNodes[i].innerHTML = classPrediction;
         }
         
+
+    }
+    async function confirming() {
+        const comfirmstates =  statusname.join("の教科書\n");
+        window.alert(comfirmstates);
 
     }
 
