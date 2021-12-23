@@ -8,8 +8,8 @@
 </head>
 <body>
     <div>This is casher of your Text book.</div>
-    <div>Please click the button below and show the text you want.</div>
 <button type="button" onclick="init()">Welcome</button>
+<div>Please click the button below and show the text you want.</div>
 <button type="button" onclick="outdoor()">Enter</button>
 <button type="button" onclick="Delete()">Delete</button>
 <button type="button" onclick="reset()">Reset</button>
@@ -71,10 +71,12 @@
         // 要素の追加
         if (!div1.hasChildNodes()) {
           const p1 = document.createElement("p");
-          const text1 = document.createTextNode("テスト");
+          const text1 = document.createTextNode(status);
           p1.appendChild(text1);
           div1.appendChild(p1);
         }
+        var audio = new Audio( 'complex' + '.mp3');
+        audio.play();
     }
     
 
@@ -83,12 +85,14 @@
         await predict();
         window.requestAnimationFrame(loop);
     }
-    var status = "商品なし"
+    var status = "商品なし";
+    var countup = 0;
 
     // run the webcam image through the image model
     async function predict() {
         // predict can take in an image, video or canvas html element
         const prediction = await model.predict(webcam.canvas);
+        var beforeStatus = status;
 
         if (prediction[0].probability.toFixed(2) > 0.90) {
             status = "TORED"
@@ -113,6 +117,18 @@
         }
         console.log(status);
 
+        if (beforeStatus == status) {
+            count++;
+        } else if (beforeStatus != status) {
+            count = 0;
+        } else if (Status = 0) {
+            count = 0;
+        }
+
+        if (count == 30) {
+            var audio = new Audio( Status + '.mp3')
+            audio.play();
+        }
 
         for (let i = 0; i < maxPredictions; i++) {
             const classPrediction =
@@ -120,6 +136,7 @@
             labelContainer.childNodes[i].innerHTML = classPrediction;
         }
         
+
     }
 
 </script>
