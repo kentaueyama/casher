@@ -7,7 +7,7 @@
     <title>Document</title>
 </head>
 <body>
-    <div>This is casher of your Text book.7</div>
+    <div>This is casher of your Text book.8</div>
 <button type="button" onclick="init()">Welcome</button>
 <div>Please click the button below and show the text you want.</div>
 <div id="webcam-container"></div>
@@ -116,7 +116,7 @@
     var countup = 0;
     var items = [];
     var value = [];
-    var valuenumber = 0;
+    var valueNumber = 0;
     var myString = "<p>合計金額一覧 </p>" ;
     var balance = 0 ;
 
@@ -162,7 +162,7 @@
         console.log(status);
 
         if (status == "noitem") {
-            countup++
+            countup = 0;
         } else if (beforeStatus != status) {
             countup = 0;
         } else if (beforeStatus == status) {
