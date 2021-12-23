@@ -7,11 +7,12 @@
     <title>Document</title>
 </head>
 <body>
-    <div>This is casher of your Text book.8</div>
+    <div>This is casher of your Text book.9</div>
 <button type="button" onclick="init()">Welcome</button>
 <div>Please click the button below and show the text you want.</div>
 <div id="webcam-container"></div>
 <div id="label-container"></div>
+<div></div>
 <div id="resume"></div>
 <div id="div1"></div>
 <p><button type="button" onclick="outdoor()">Enter</button></p>
@@ -68,6 +69,7 @@
 
     
     async function outdoor() {
+        resume = document.getElementById("resume");
         for (let la in items) { // and class labels
             resume.appendChild(document.createElement("div"));
         }
