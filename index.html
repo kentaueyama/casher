@@ -7,11 +7,12 @@
     <title>Document</title>
 </head>
 <body>
-    <div>This is casher of your Text book.6</div>
+    <div>This is casher of your Text book.7</div>
 <button type="button" onclick="init()">Welcome</button>
 <div>Please click the button below and show the text you want.</div>
 <div id="webcam-container"></div>
 <div id="label-container"></div>
+<div id="resume"></div>
 <div id="div1"></div>
 <p><button type="button" onclick="outdoor()">Enter</button></p>
 <p><button type="button" onclick="Delete()">Delete</button></p>
@@ -71,7 +72,7 @@
         for (var la in items) {
             const visionowner =
                 items[la] + ": " + value[la] +"円";
-            labelContainer.childNodes[la].innerHTML = visionowner ;
+            resume.childNodes[la].innerHTML = visionowner ;
         }
         
 
@@ -115,7 +116,7 @@
     var countup = 0;
     var items = [];
     var value = [];
-    var elementNumber = 0 ;
+    var valuenumber = 0;
     var myString = "<p>合計金額一覧 </p>" ;
     var balance = 0 ;
 
@@ -130,7 +131,7 @@
             status = "noitem";
             volumeNumber = 0 ;
         } else if (prediction[1].probability.toFixed(2) > 0.90) {
-            status = network;
+            status = "network";
             volumeNumber = networkval;
         } else if (prediction[2].probability.toFixed(2) > 0.90) {
             status = "environ";
@@ -151,7 +152,7 @@
             status = "complex";
             volumeNumber = complexval;
         } else if (prediction[8].probability.toFixed(2) > 0.90) {
-            status = "TOE6val";
+            status = "TOE6";
             volumeNumber =TOE6val;
         } else if (prediction[0].probability.toFixed(2) > 0.90) {
             status = "TORED";
@@ -173,7 +174,6 @@
             audio.play();
             items.push(status);
             value.push(volumeNumber)
-            elementNumber++
         }
 
         for (let i = 0; i < maxPredictions; i++) {
@@ -182,8 +182,6 @@
             labelContainer.childNodes[i].innerHTML = classPrediction;
         }
         
-        console.log(items);
-        console.log(value);
 
     }
 
