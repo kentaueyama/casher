@@ -7,9 +7,12 @@
     <title>Document</title>
 </head>
 <body>
-    <div>This is casher of your Text book</div>
+    <div>This is casher of your Text book.</div>
+    <div>Please click the button below and show the text you want.</div>
 <button type="button" onclick="init()">Welcome</button>
 <button type="button" onclick="outdoor()">Enter</button>
+<button type="button" onclick="Delete()">Delete</button>
+<button type="button" onclick="reset()">Reset</button>
 <div id="webcam-container"></div>
 <div id="label-container"></div>
 <div id="div1"></div>
@@ -22,7 +25,7 @@
     // the link to your model provided by Teachable Machine export panel
     const URL = "./my_model/"
 
-    const hukusoval = 2580*1.1;
+    const complexval = 2580*1.1;
     const TOE6val = 3000*1.1;
     const environval=2300*1.1;
     const networkval=3000*1.1;
@@ -80,21 +83,42 @@
         await predict();
         window.requestAnimationFrame(loop);
     }
+    var status = "商品なし"
 
     // run the webcam image through the image model
     async function predict() {
         // predict can take in an image, video or canvas html element
         const prediction = await model.predict(webcam.canvas);
 
+        if (prediction[0].probability.toFixed(2) > 0.90) {
+            status = "TORED"
+        } else if (prediction[1].probability.toFixed(2) > 0.90) {
+            status = "network"
+        } else if (prediction[2].probability.toFixed(2) > 0.90) {
+            status = "environ"
+        } else if (prediction[3].probability.toFixed(2) > 0.90) {
+            status = "rinri"
+        } else if (prediction[4].probability.toFixed(2) > 0.90) {
+            status = "vector"
+        } else if (prediction[5].probability.toFixed(2) > 0.90) {
+            status = "digital"
+        } else if (prediction[6].probability.toFixed(2) > 0.90) {
+            status = "agri"
+        } else if (prediction[7].probability.toFixed(2) > 0.90) {
+            status = "complex"
+        } else if (prediction[8].probability.toFixed(2) > 0.90) {
+            status = "TOE6"
+        } else if (prediction[9].probability.toFixed(2) > 0.90) {
+            status = "noitem"
+        }
+        console.log(status);
 
 
-        
         for (let i = 0; i < maxPredictions; i++) {
             const classPrediction =
                 prediction[i].className + ": " + prediction[i].probability.toFixed(2);
             labelContainer.childNodes[i].innerHTML = classPrediction;
         }
-        
         
     }
 
