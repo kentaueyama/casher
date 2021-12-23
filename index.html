@@ -67,6 +67,7 @@
 
     
     async function outdoor() {
+
         let div1 = document.getElementById("div1");
         // 要素の追加
         if (!div1.hasChildNodes()) {
@@ -89,6 +90,7 @@
     var countup = 0;
     var items = [];
     var value = [];
+    var elementNumber = 0 ;
 
     // run the webcam image through the image model
     async function predict() {
@@ -121,19 +123,20 @@
         console.log(status);
 
         if (beforeStatus == status) {
-            count++
+            countup++
         } else if (beforeStatus != status) {
-            count = 0;
-        } else if (Status = 0) {
-            count = 0;
+            countup = 0;
+        } else if (status = 0) {
+            countup = 0;
         }
 
-        if (count == 30) {
+        if (countup == 30) {
             var audio = new Audio( status + '.mp3');
             audio.play();
             items.push(prediction[i].className);
             var volumeNumber = status + 'val';
-            value.push()
+            value.push(volumeNumber)
+            elementNumber++
         }
 
         for (let i = 0; i < maxPredictions; i++) {
@@ -142,6 +145,8 @@
             labelContainer.childNodes[i].innerHTML = classPrediction;
         }
         
+        console.log(items);
+        console.log(value);
 
     }
 
