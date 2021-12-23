@@ -87,6 +87,8 @@
     }
     var status = "商品なし";
     var countup = 0;
+    var items = [];
+    var value = [];
 
     // run the webcam image through the image model
     async function predict() {
@@ -115,10 +117,11 @@
         } else if (prediction[9].probability.toFixed(2) > 0.90) {
             status = "noitem"
         }
+
         console.log(status);
 
         if (beforeStatus == status) {
-            count++;
+            count++
         } else if (beforeStatus != status) {
             count = 0;
         } else if (Status = 0) {
