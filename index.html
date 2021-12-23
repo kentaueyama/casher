@@ -7,7 +7,7 @@
     <title>Document</title>
 </head>
 <body>
-    <div>This is casher of your Text book.2</div>
+    <div>This is casher of your Text book.4</div>
 <button type="button" onclick="init()">Welcome</button>
 <div>Please click the button below and show the text you want.</div>
 <div id="webcam-container"></div>
@@ -78,8 +78,16 @@
         if (!div1.hasChildNodes()) {
           const p1 = document.createElement("p");
           const text1 = document.createTextNode(myString);
+          const p2 = document.createElement("p");
+          const text2 = document.createTextNode(items);
+          const p3 = document.createElement("p");
+          const text3 = document.createTextNode(value);
           p1.appendChild(text1);
           div1.appendChild(p1);
+          p2.appendChild(text2);
+          div1.appendChild(p2);
+          p3.appendChild(text3);
+          div1.appendChild(p3);
         }
     }
     
@@ -114,31 +122,31 @@
             status = "noitem";
             volumeNumber = 0 ;
         } else if (prediction[1].probability.toFixed(2) > 0.90) {
-            status = "network";
+            status = "prediction[1]].className";
             volumeNumber = networkval;
         } else if (prediction[2].probability.toFixed(2) > 0.90) {
-            status = "environ";
+            status = "prediction[2]].className";
             volumeNumber = environval;
         } else if (prediction[3].probability.toFixed(2) > 0.90) {
-            status = "rinri";
+            status = "prediction[3]].className";
             volumeNumber = rinrival;
         } else if (prediction[4].probability.toFixed(2) > 0.90) {
-            status = "vector";
+            status = "prediction[4]].className";
             volumeNumber = vectorval;
         } else if (prediction[5].probability.toFixed(2) > 0.90) {
-            status = "digital";
+            status = "prediction[5]].className";
             volumeNumber = digitalval;
         } else if (prediction[6].probability.toFixed(2) > 0.90) {
-            status = "agri";
+            status = "prediction[6]].className";
             volumeNumber = agrival;
         } else if (prediction[7].probability.toFixed(2) > 0.90) {
-            status = "complex";
+            status = "prediction[7]].className";
             volumeNumber = complexval;
         } else if (prediction[8].probability.toFixed(2) > 0.90) {
-            status = "TOE6";
+            status = "prediction[8]].className";
             volumeNumber =TOE6val;
         } else if (prediction[0].probability.toFixed(2) > 0.90) {
-            status = "TORED";
+            status = "prediction[0]].className";
             volumeNumber = TOREDval;
         }
 
@@ -154,7 +162,7 @@
             
         if (countup == 30) {
             var audio = new Audio( status + '.mp3');
-             audio.play();
+            audio.play();
             items.push(status);
             value.push(volumeNumber)
             elementNumber++
