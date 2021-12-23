@@ -10,12 +10,12 @@
     <div>This is casher of your Text book.</div>
 <button type="button" onclick="init()">Welcome</button>
 <div>Please click the button below and show the text you want.</div>
-<button type="button" onclick="outdoor()">Enter</button>
-<button type="button" onclick="Delete()">Delete</button>
-<button type="button" onclick="reset()">Reset</button>
 <div id="webcam-container"></div>
 <div id="label-container"></div>
 <div id="div1"></div>
+<p><button type="button" onclick="outdoor()">Enter</button></p>
+<p><button type="button" onclick="Delete()">Delete</button></p>
+<p><button type="button" onclick="window.location.reload();"">Reset</button></p>
 <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@1.3.1/dist/tf.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@teachablemachine/image@0.8/dist/teachablemachine-image.min.js"></script>
 <script type="text/javascript">
@@ -68,19 +68,20 @@
     
     async function outdoor() {
         for (var m in items){
-            myString = myString.concat(myArray[m]);
+            balance = balance + value[m] ;
         }
+        
+        myString = "合計"+balance+"円です";
 
         let div1 = document.getElementById("div1");
         // 要素の追加
         if (!div1.hasChildNodes()) {
           const p1 = document.createElement("p");
-          const text1 = document.createTextNode(status);
+          const text1 = document.createTextNode(myString);
           p1.appendChild(text1);
           div1.appendChild(p1);
         }
-        var audio = new Audio( status + '.mp3');
-        audio.play();
+    alert(myString);
     }
     
     async function Delete() {
@@ -100,8 +101,9 @@
     var items = [];
     var value = [];
     var elementNumber = 0 ;
-    var myString = "合計金額一覧/n" ;
-    
+    var myString = "<p>合計金額一覧 </p>" ;
+    var balance = 0 ;
+
 
     // run the webcam image through the image model
     async function predict() {
@@ -137,7 +139,7 @@
             countup++
         } else if (beforeStatus != status) {
             countup = 0;
-        } else if (status = 0) {
+        } else if (status = noitem) {
             countup = 0;
         }
 
