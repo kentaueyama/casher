@@ -7,7 +7,7 @@
     <title>Document</title>
 </head>
 <body>
-    <div>This is casher of your Text book.4</div>
+    <div>This is casher of your Text book.6</div>
 <button type="button" onclick="init()">Welcome</button>
 <div>Please click the button below and show the text you want.</div>
 <div id="webcam-container"></div>
@@ -67,6 +67,14 @@
 
     
     async function outdoor() {
+
+        for (var la in items) {
+            const visionowner =
+                items[la] + ": " + value[la] +"円";
+            labelContainer.childNodes[la].innerHTML = visionowner ;
+        }
+        
+
         for (var m in items){
             balance = balance + value[m] ;
         }
@@ -122,42 +130,42 @@
             status = "noitem";
             volumeNumber = 0 ;
         } else if (prediction[1].probability.toFixed(2) > 0.90) {
-            status = "prediction[1]].className";
+            status = network;
             volumeNumber = networkval;
         } else if (prediction[2].probability.toFixed(2) > 0.90) {
-            status = "prediction[2]].className";
+            status = "environ";
             volumeNumber = environval;
         } else if (prediction[3].probability.toFixed(2) > 0.90) {
-            status = "prediction[3]].className";
+            status = "rinri";
             volumeNumber = rinrival;
         } else if (prediction[4].probability.toFixed(2) > 0.90) {
-            status = "prediction[4]].className";
+            status = "vector";
             volumeNumber = vectorval;
         } else if (prediction[5].probability.toFixed(2) > 0.90) {
-            status = "prediction[5]].className";
+            status = "digital";
             volumeNumber = digitalval;
         } else if (prediction[6].probability.toFixed(2) > 0.90) {
-            status = "prediction[6]].className";
+            status = "agri";
             volumeNumber = agrival;
         } else if (prediction[7].probability.toFixed(2) > 0.90) {
-            status = "prediction[7]].className";
+            status = "complex";
             volumeNumber = complexval;
         } else if (prediction[8].probability.toFixed(2) > 0.90) {
-            status = "prediction[8]].className";
+            status = "TOE6val";
             volumeNumber =TOE6val;
         } else if (prediction[0].probability.toFixed(2) > 0.90) {
-            status = "prediction[0]].className";
+            status = "TORED";
             volumeNumber = TOREDval;
         }
 
         console.log(status);
 
-        if (beforeStatus == status) {
+        if (status == "noitem") {
             countup++
         } else if (beforeStatus != status) {
             countup = 0;
-        } else if (status = noitem) {
-            countup = 0;
+        } else if (beforeStatus == status) {
+            countup++
         }
             
         if (countup == 30) {
