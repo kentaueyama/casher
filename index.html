@@ -67,6 +67,9 @@
 
     
     async function outdoor() {
+        for (var m in items){
+            myString = myString.concat(myArray[m]);
+        }
 
         let div1 = document.getElementById("div1");
         // 要素の追加
@@ -80,17 +83,25 @@
         audio.play();
     }
     
+    async function Delete() {
+        var audio = new Audio( 'delete' + '.mp3');
+        audio.play();
+        items.pop();
+        value.pop();
+    }
 
     async function loop() {
         webcam.update(); // update the webcam frame
         await predict();
         window.requestAnimationFrame(loop);
     }
-    var status = "TORED";
+    var status = "noitem";
     var countup = 0;
     var items = [];
     var value = [];
     var elementNumber = 0 ;
+    var myString = "合計金額一覧/n" ;
+    
 
     // run the webcam image through the image model
     async function predict() {
@@ -98,8 +109,8 @@
         const prediction = await model.predict(webcam.canvas);
         var beforeStatus = status;
 
-        if (prediction[0].probability.toFixed(2) > 0.90) {
-            status = "TORED"
+        if (prediction[9].probability.toFixed(2) > 0.90) {
+            status = "noitem"
         } else if (prediction[1].probability.toFixed(2) > 0.90) {
             status = "network"
         } else if (prediction[2].probability.toFixed(2) > 0.90) {
@@ -116,8 +127,8 @@
             status = "complex"
         } else if (prediction[8].probability.toFixed(2) > 0.90) {
             status = "TOE6"
-        } else if (prediction[9].probability.toFixed(2) > 0.90) {
-            status = "noitem"
+        } else if (prediction[0].probability.toFixed(2) > 0.90) {
+            status = "TORED"
         }
 
         console.log(status);
@@ -130,19 +141,19 @@
             countup = 0;
         }
 
-        if (countup == 30) {
-            var audio = new Audio( status + '.mp3');
-            audio.play();
-            items.push(prediction[i].className);
-            var volumeNumber = status + 'val';
-            value.push(volumeNumber)
-            elementNumber++
-        }
-
         for (let i = 0; i < maxPredictions; i++) {
             const classPrediction =
                 prediction[i].className + ": " + prediction[i].probability.toFixed(2);
             labelContainer.childNodes[i].innerHTML = classPrediction;
+            
+            if (countup == 30) {
+                var audio = new Audio( status + '.mp3');
+                audio.play();
+                items.push(prediction[i].className);
+                var volumeNumber = status + 'val';
+                value.push(volumeNumber)
+                elementNumber++
+            }
         }
         
         console.log(items);
