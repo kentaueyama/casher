@@ -75,7 +75,7 @@
           p1.appendChild(text1);
           div1.appendChild(p1);
         }
-        var audio = new Audio( 'complex' + '.mp3');
+        var audio = new Audio( status + '.mp3');
         audio.play();
     }
     
@@ -85,7 +85,7 @@
         await predict();
         window.requestAnimationFrame(loop);
     }
-    var status = "商品なし";
+    var status = "TORED";
     var countup = 0;
     var items = [];
     var value = [];
@@ -129,8 +129,11 @@
         }
 
         if (count == 30) {
-            var audio = new Audio( Status + '.mp3')
+            var audio = new Audio( status + '.mp3');
             audio.play();
+            items.push(prediction[i].className);
+            var volumeNumber = status + 'val';
+            value.push()
         }
 
         for (let i = 0; i < maxPredictions; i++) {
