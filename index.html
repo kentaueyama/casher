@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
-<body>
+<body> 
     <div>いらっしゃいませ_教科書の会計所です</div>
     <div>Welcomeボタンを押してから、商品の表紙を読み込ませてください</div>
     <div>読ませ終わったらEnterボタンを押してください</div>
@@ -30,6 +30,7 @@
     // https://github.com/googlecreativelab/teachablemachine-community/tree/master/libraries/image
 
     // the link to your model provided by Teachable Machine export panel
+    // 教科書の値段を定義
     const URL = "./my_model/"
 
     const complexval = 2580*1.1;
@@ -72,48 +73,7 @@
         }
     }
 
-    
-    async function outdoor() {
-        resume = document.getElementById("resume");
-        for (let la in items) { // and class labels
-            resume.appendChild(document.createElement("div"));
-        }
-
-        for (let la in items) {
-            const visionowner =
-                items[la] + ": " + value[la] +"円";
-            resume.childNodes[la].innerHTML = visionowner ;
-        }
-        
-
-        for (let m in items){
-            balance = balance + value[m] ;
-        }
-        
-        myString = "合計"+balance+"円です";
-
-        let div1 = document.getElementById("div1");
-        // 要素の追加
-        if (!div1.hasChildNodes()) {
-          const p1 = document.createElement("p");
-          const text1 = document.createTextNode(myString);
-          p1.appendChild(text1);
-          div1.appendChild(p1);
-        }
-    }
-    
-    async function Delete() {
-        var audio = new Audio( 'delete' + '.mp3');
-        audio.play();
-        items.pop();
-        value.pop();
-    }
-
-    async function loop() {
-        webcam.update(); // update the webcam frame
-        await predict();
-        window.requestAnimationFrame(loop);
-    }
+    //引数定義
     var status = "noitem";
     var countup = 0;
     var items = [];
@@ -129,7 +89,7 @@
         // predict can take in an image, video or canvas html element
         const prediction = await model.predict(webcam.canvas);
         var beforeStatus = status;
-
+        //画像認識結果から、現在のstatus、教科書の名前、値段を得る
         if (prediction[9].probability.toFixed(2) > 0.90) {
             status = "noitem";
             statusname = "商品なし";
@@ -174,6 +134,7 @@
 
         console.log(status);
 
+        //商品がないとき、また先ほどと認識した商品が違うときは、カウントをリセット、同じときは加算
         if (status == "noitem") {
             countup = 0;
         } else if (beforeStatus != status) {
@@ -181,7 +142,7 @@
         } else if (beforeStatus == status) {
             countup++
         }
-            
+        // カウントが30になったらアイテム追加＋音声
         if (countup == 30) {
             var audio = new Audio( status + '.mp3');
             audio.play();
@@ -197,6 +158,54 @@
         
 
     }
+    
+    // Enter ボタンを押したときの機能
+    async function outdoor() {
+        //会計結果を表示する
+        resume = document.getElementById("resume");
+        for (let la in items) { // and class labels
+            resume.appendChild(document.createElement("div"));
+        }
+
+        for (let la in items) {
+            const visionowner =
+                items[la] + ": " + value[la] +"円";
+            resume.childNodes[la].innerHTML = visionowner ;
+        }
+        // 支払金額を計算する
+        for (let m in items){
+            balance = balance + value[m] ;
+        }
+        
+        myString = "合計"+balance+"円です";
+
+        //支払金額の表示
+        let div1 = document.getElementById("div1");
+        // 要素の追加
+        if (!div1.hasChildNodes()) {
+          const p1 = document.createElement("p");
+          const text1 = document.createTextNode(myString);
+          p1.appendChild(text1);
+          div1.appendChild(p1);
+        }
+    }
+    
+    // deleteボタンが押されたら、各リストの最後のアイテムをなくす
+    async function Delete() {
+        var audio = new Audio( 'delete' + '.mp3');
+        audio.play();
+        items.pop();
+        value.pop();
+    }
+
+    async function loop() {
+        webcam.update(); // update the webcam frame
+        await predict();
+        window.requestAnimationFrame(loop);
+    }
+
+
+    // アイテム確認
     async function confirming() {
         const comfirmstates =  items.join("\n");
         window.alert(comfirmstates);
